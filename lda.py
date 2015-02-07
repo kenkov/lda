@@ -63,7 +63,7 @@ class LDA:
             w_set = w_set.union(set(doc))
         num_w = len(w_set)
 
-        self.logger.info("num_d: {}, num_w: {}, num_z:{}".format(
+        self.logger.info("train model: num_d={}, num_w={}, num_z={}".format(
             num_d, num_w, self.num_z))
 
         n_m = np.zeros(num_d)
@@ -182,7 +182,7 @@ class LDA:
             self.p_zm = p_zm
 
             self.logger.info(
-                "load model from : num_d={}, num_w={}, num_z={}".format(
+                "load model from {}: num_d={}, num_w={}, num_z={}".format(
                     filename,
                     num_d, num_w, num_z
                 )
