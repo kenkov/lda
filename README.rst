@@ -25,7 +25,7 @@ Collapsed Gibbs Sampling を使った LDA の実装です。
 
 .. code-block:: bash
 
-    $ python lda.py test.txt
+    $ python lda.py test.txt -n2
     2015-02-07 18:05:13,694 - lda.py - INFO - num_d: 5, num_w: 6, num_z:2
     2015-02-07 18:05:13,728 - lda.py - INFO - save model in test.model: num_d=5, num_w=6, num_z=2
     2015-02-07 18:05:13,728 - lda.py - INFO - load model from : num_d=test.model, num_w=5, num_z=6
@@ -34,3 +34,5 @@ Collapsed Gibbs Sampling を使った LDA の実装です。
      [ 0.625       0.375     ]
      [ 0.25        0.75      ]
      [ 0.66666667  0.33333333]]
+
+``-n`` オプションでトピック数を指定します。デフォルトのトピック数は ``2`` です。

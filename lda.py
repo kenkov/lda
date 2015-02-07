@@ -213,6 +213,13 @@ if __name__ == '__main__':
         action="store_true",
         help="show DEBUG log"
     )
+    parser.add_argument(
+        "-n", "--num_z",
+        type=int,
+        nargs="?",
+        default=2,
+        help="show DEBUG log"
+    )
     args = parser.parse_args()
 
     # logger
@@ -227,7 +234,7 @@ if __name__ == '__main__':
     dictionary = file2dic(args.filename)
     corpus = Corpus(args.filename, dictionary)
 
-    lda = LDA(dictionary, num_z=2)
+    lda = LDA(dictionary, num_z=args.num_z)
     lda.train(corpus)
     lda.save(modelname)
     lda.load(modelname)
