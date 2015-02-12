@@ -53,6 +53,7 @@ class LDA:
         corpus,
         alpha: float=2.,
         beta: float=2.,
+        burn_in: int=1000
     ):
 
         # count documents and words
@@ -63,8 +64,11 @@ class LDA:
             w_set = w_set.union(set(doc))
         num_w = len(w_set)
 
-        self.logger.info("train model: num_d={}, num_w={}, num_z={}".format(
-            num_d, num_w, self.num_z))
+        self.logger.info(
+            "train model: num_d={}, num_w={}, num_z={}, burn-in={}".format(
+                num_d, num_w, self.num_z, burn_in
+            )
+        )
 
         n_m = np.zeros(num_d)
         n_mz = np.zeros((num_d, self.num_z))
@@ -84,8 +88,8 @@ class LDA:
 
         # Gibbs sampling
         # sampling hidden variable {z_mn} after burn-in period
-        # burn-in period: 100
-        for i in range(101):
+        # default burn-in period: 1000
+        for i in range(burn_in + 1):
             for m, doc in enumerate(corpus):
                 for n, w in enumerate(doc):
                     # set current topic
@@ -222,6 +226,13 @@ if __name__ == '__main__':
         default=2,
         help="show DEBUG log"
     )
+    parser.add_argument(
+        "-b", "--burn-in",
+        type=int,
+        nargs="?",
+        default=1000,
+        help="burn-in period"
+    )
     args = parser.parse_args()
 
     # logger
@@ -237,7 +248,7 @@ if __name__ == '__main__':
     corpus = Corpus(args.filename, dictionary)
 
     lda = LDA(dictionary, num_z=args.num_z)
-    lda.train(corpus)
+    lda.train(corpus, burn_in=args.burn_in)
     lda.save(modelname)
     lda.load(modelname)
     lda.show_prob()
