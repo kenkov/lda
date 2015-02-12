@@ -82,8 +82,10 @@ class LDA:
                 n_wz[w, z] += 1
                 n_z[z] += 1
 
-        # sampling z
-        for i in range(100):
+        # Gibbs sampling
+        # sampling hidden variable {z_mn} after burn-in period
+        # burn-in period: 100
+        for i in range(101):
             for m, doc in enumerate(corpus):
                 for n, w in enumerate(doc):
                     # set current topic
