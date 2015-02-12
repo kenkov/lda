@@ -44,6 +44,7 @@ Collapsed Gibbs Sampling を使った LDA の実装です。
 ``-n`` オプションでトピック数を指定します。デフォルトのトピック数は ``2`` です。
 
 **burn-in period** を設定する場合には ``--burn-in`` オプションを使ってください。
+デフォルトの burn-in period は ``1000`` です。
 
 .. code-block:: bash
 
